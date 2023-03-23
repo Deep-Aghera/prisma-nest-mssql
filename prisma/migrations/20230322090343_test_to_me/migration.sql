@@ -1,0 +1,23 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[Persons] (
+    [PersonID] INT NOT NULL IDENTITY(1,1),
+    [LastName] VARCHAR(255),
+    CONSTRAINT [Persons_pkey] PRIMARY KEY CLUSTERED ([PersonID])
+);
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH
