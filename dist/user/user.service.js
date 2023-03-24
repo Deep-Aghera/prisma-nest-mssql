@@ -10,14 +10,22 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
+const bcrypt = require("bcrypt");
 let data = prisma.user.findMany().then(data => data);
 let UserService = class UserService {
     getUser() {
         console.log(data);
         return data;
     }
-    postUser(userData) {
+    async postUser(userData) {
         console.log(userData);
+        const saltOrRound = 10;
+        console.log(userData.password);
+        const password = userData.password;
+        const hash = await bcrypt.hash(password, saltOrRound);
+        console.log(hash);
+        userData.password = hash;
+        console.log("helo", userData.password);
         let user = prisma.user.create({
             data: userData,
         }).then(data => data);

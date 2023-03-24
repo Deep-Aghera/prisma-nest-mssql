@@ -1,4 +1,4 @@
 export declare class UserService {
     getUser(): Promise<import(".prisma/client").user[]>;
-    postUser(userData: any): string;
+    postUser(userData: any): Promise<string>;
 }

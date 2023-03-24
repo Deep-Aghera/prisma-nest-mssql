@@ -2,6 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
+import * as bcrypt from 'bcrypt';
+
+
+
 let data = prisma.user.findMany().then(data => data);
 
 @Injectable()
@@ -12,8 +16,15 @@ export class UserService {
         return data;
     }
 
-    postUser(userData) {
-        console.log(userData);
+    async postUser(userData) {
+        //console.log(userData);
+        const saltOrRound = 10;
+        //console.log(userData.password)
+         const password = userData.password;
+         const hash = await bcrypt.hash(password,saltOrRound);
+        // console.log(hash);
+         userData.password = hash;
+         console.log("helo",userData.password)
         let user = prisma.user.create({
             data: userData,
           }).then(data => data)
