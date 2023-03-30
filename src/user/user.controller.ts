@@ -15,4 +15,9 @@ export class UserController {
     userGet() {
         return this.userService.getUser();
     }
+
+    @Get('login') 
+    userCheck(@Body() userData) {
+      return this.userService.credentialVarification(userData);
+    }
 }

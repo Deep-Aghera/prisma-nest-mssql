@@ -4,4 +4,5 @@ export declare class UserController {
     constructor(userService: UserService);
     getPost(userData: any): Promise<string>;
     userGet(): Promise<import(".prisma/client").user[]>;
+    userCheck(userData: any): string;
 }

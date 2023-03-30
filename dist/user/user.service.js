@@ -18,18 +18,18 @@ let UserService = class UserService {
         return data;
     }
     async postUser(userData) {
-        console.log(userData);
         const saltOrRound = 10;
-        console.log(userData.password);
         const password = userData.password;
         const hash = await bcrypt.hash(password, saltOrRound);
-        console.log(hash);
         userData.password = hash;
-        console.log("helo", userData.password);
         let user = prisma.user.create({
             data: userData,
         }).then(data => data);
         return "post user data";
+    }
+    credentialVarification(credential) {
+        console.log(credential);
+        return "you log in";
     }
 };
 UserService = __decorate([

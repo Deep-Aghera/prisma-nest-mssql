@@ -19,15 +19,17 @@ export class UserService {
     async postUser(userData) {
         
         const saltOrRound = 10;
-       
-         const password = userData.password;
-         const hash = await bcrypt.hash(password,saltOrRound);
-      
-         userData.password = hash;
-         console.log("helo",userData.password)
+        const password = userData.password;
+        const hash = await bcrypt.hash(password,saltOrRound);
+        userData.password = hash;
         let user = prisma.user.create({
             data: userData,
           }).then(data => data)
         return "post user data";
+    }
+
+    credentialVarification(credential) {
+        console.log(credential)
+         return "you log in";
     }
 }

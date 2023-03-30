@@ -8,11 +8,13 @@ datasource db {
 }
 
 model user {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(40)
-  email String @db.VarChar(50)
-  password String @db.VarChar(100)
+  id        Int    @id @default(autoincrement())
+  firstname String @db.VarChar(50)
+  lastname  String @db.VarChar(50)
+  email     String @unique @db.VarChar(50)
+  password  String @db.VarChar(100)
 }
+
 model Persons {
   PersonID Int     @id @default(autoincrement())
   LastName String? @db.VarChar(255)
